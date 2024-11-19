@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title th:text="#{title.lista_relatorio}">Lista de Relatórios</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap">
+    <style>
+        /* Estilo global */
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: #eaf2f2;
+            margin: 0;
+            padding: 20px;
+            color: #333;
+        }
+        
+        /* Título */
+        h2 {
+            color: #006d77;
+            font-size: 24px;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        
+        /* Estilo da tabela */
+        table {
+            width: 100%;
+            margin-top: 20px;
+            border-collapse: collapse;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            background-color: #ffffff;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+        
+        th, td {
+            padding: 15px;
+            text-align: left;
+        }
+        
+        th {
+            background-color: #009688; /* Tom de verde */
+            color: white;
+            text-transform: uppercase;
+            font-weight: 700;
+            font-size: 14px;
+        }
+        
+        td {
+            border-bottom: 1px solid #eeeeee;
+            font-size: 14px;
+            color: #333333;
+        }
+
+        /* Estilo alternado para linhas */
+        tr:nth-child(even) td {
+            background-color: #f3f9f9;
+        }
+
+        /* Botões */
+        .button {
+            background-color: #006d77;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 600;
+            display: inline-block;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            margin-right: 5px;
+        }
+
+        .button:hover {
+            background-color: #004f58;
+        }
+
+        /* Botão principal */
+        .button-primary {
+            background-color: #009688; /* Tom de verde */
+            margin: 20px 5px;
+        }
+
+        .button-primary:hover {
+            background-color: #00796b;
+        }
+
+        /* Rodapé da tabela */
+        .table-footer {
+            text-align: center;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <h2 th:text="#{title.lista_relatorio}">Lista de Relatórios</h2>
+    <table>
+        <thead>
+            <tr>
+                <th th:text="#{label.id}">ID</th>
+                <th th:text="#{label.descricao}">Período</th>
+                <th th:text="#{label.acoes}">Ações</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="relatorio : ${relatorios}">
+                <td th:text="${relatorio.id}"></td>
+                <td th:text="${relatorio.periodo}"></td>
+                <td>
+                    <a th:href="@{/relatorio/edit/{id}(id=${relatorio.id})}" class="button" th:text="#{button.editar}">Editar</a>
+                    <a th:href="@{/relatorio/delete/{id}(id=${relatorio.id})}" class="button" th:text="#{button.excluir}">Excluir</a>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <div class="table-footer">
+        <a href="/relatorio/new" class="button button-primary" th:text="#{button.adicionarr}">Adicionar Novo Relatório</a>
+        <a href="/" class="button" th:text="#{button.voltar}">Voltar</a>
+    </div>
+</body>
+</html>

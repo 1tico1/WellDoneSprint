@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title th:text="#{title.crud_index}">Energia Renovável - Índice</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: #f0f2f5;
+            margin: 0;
+            padding: 0;
+        }
+        header {
+            background-color: #006d77; /* Verde escuro */
+            color: white;
+            padding: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+        header h1 {
+            margin: 0;
+            font-size: 24px;
+        }
+        #logout-button {
+            background-color: #ff4d4d;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            color: white;
+            font-size: 14px;
+            cursor: pointer;
+        }
+        nav {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            padding: 20px;
+            background-color: #eaf2f2;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+        }
+        nav a {
+            text-decoration: none;
+            color: #006d77;
+            font-size: 16px;
+            font-weight: bold;
+            padding: 10px 15px;
+            border-radius: 5px;
+            transition: all 0.3s ease-in-out;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+        nav a:hover {
+            background-color: #006d77;
+            color: #fff;
+        }
+        .grid-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin: 40px;
+            padding: 20px;
+        }
+        .card {
+            background: #ffffff;
+            padding: 20px;
+            border-radius: 12px;
+            text-align: center;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.15);
+        }
+        .button {
+            display: block;
+            padding: 12px 20px;
+            text-align: center;
+            margin-top: 15px;
+            background-color: #009688; /* Tom de verde */
+            color: #fff;
+            text-decoration: none;
+            border-radius: 8px;
+            transition: background-color 0.3s;
+        }
+        .button:hover {
+            background-color: #00796b; /* Verde mais escuro */
+        }
+        .chat-container {
+            background: #ffffff;
+            padding: 25px;
+            margin: 40px auto;
+            max-width: 600px;
+            border-radius: 12px;
+            box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        input[type="text"] {
+            width: calc(100% - 22px);
+            padding: 15px;
+            margin-top: 15px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+        }
+        button[type="submit"] {
+            background-color: #006d77;
+            color: #fff;
+            padding: 15px;
+            margin-top: 15px;
+            border: none;
+            cursor: pointer;
+            border-radius: 8px;
+            font-weight: bold;
+        }
+        button[type="submit"]:hover {
+            background-color: #004d48;
+        }
+        .response {
+            margin-top: 25px;
+            padding: 20px;
+            background-color: #f4f4f9;
+            border-radius: 12px;
+            text-align: left;
+            box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        .language-switch {
+            display: flex;
+            justify-content: center;
+            margin-top: 15px;
+            gap: 15px;
+        }
+        .language-switch a {
+            padding: 10px 20px;
+            text-align: center;
+            background-color: #006d77; /* Verde escuro */
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 14px;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .language-switch a:hover {
+            background-color: #004d48; /* Verde mais escuro */
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1 th:text="#{title.crud_index}">Energia Renovável - Plataforma</h1>
+         <a href="/logout" id="logout-button">Logout</a>    </header>
+    
+    <!-- Botões de Internacionalização -->
+    <div class="language-switch">
+        <a href="/setLocale?lang=pt" class="button">
+            <i class="fas fa-globe"></i> Português
+        </a>
+        <a href="/setLocale?lang=en" class="button">
+            <i class="fas fa-globe"></i> English
+        </a>
+    </div>
+
+    <!-- Botões de navegação principais -->
+    <nav>
+        <a href="/usuario/list" th:text="#{link.usuarios}"><i class="fas fa-users"></i> Usuários</a>
+        <a href="/energia/list" th:text="#{link.energia}"><i class="fas fa-bolt"></i> Energia</a>
+        <a href="/consumo/list" th:text="#{link.consumo}"><i class="fas fa-chart-line"></i> Consumo</a>
+        <a href="/relatorio/list" th:text="#{link.relatorio}"><i class="fas fa-file-alt"></i> Relatórios</a>
+        <a href="/info" th:text="Info"><i class="fas fa-info-circle"></i> Info</a>
+    </nav>
+
+    <div class="grid-container">
+        <div class="card">
+            <h3 th:text="#{link.usuarios}">Usuários</h3>
+            <a href="/novo_usuario" class="button" th:text="#{button.adicionaru}">Adicionar Usuário</a>
+        </div>
+        <div class="card">
+            <h3 th:text="#{link.energia}">Energia</h3>
+            <a href="/energia/new" class="button" th:text="#{button.adicionare}">Adicionar Energia</a>
+        </div>
+        <div class="card">
+            <h3 th:text="#{link.consumo}">Consumo</h3>
+            <a href="/consumo/new" class="button" th:text="#{button.adicionarc}">Adicionar Consumo</a>
+        </div>
+        <div class="card">
+            <h3 th:text="#{link.relatorio}">Relatórios</h3>
+            <a href="/relatorio/new" class="button" th:text="#{button.adicionarr}">Adicionar Relatório</a>
+        </div>
+    </div>
+
+    <div class="chat-container">
+        <h2>Chat com o GPT</h2>
+        <form th:action="@{/enviar_chat_gpt}" method="post">
+            <input type="text" name="pergunta" placeholder="Faça sua pergunta ao ChatGPT" required>
+            <button type="submit">Enviar Pergunta</button>
+        </form>
+        <div th:if="${resposta != null}">
+            <h3>Resposta:</h3>
+            <div class="response" th:text="${resposta}">Aqui vai a resposta do ChatGPT</div>
+        </div>
+    </div>
+</body>
+</html>
